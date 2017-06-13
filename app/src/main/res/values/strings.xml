@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="nhiet_do">Nhiet do</string>
+    <string name="nhiet_do_thap_nhat">Nhiet do thap nhat</string>
+    <string name="nhiet_do_cao_nhat">Nhiet do cao nhat</string>
+    <string name="do_am">Do am</string>
 </resources>
