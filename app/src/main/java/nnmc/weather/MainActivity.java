@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView minTemp;
     TextView humidity;
     TextView city;
-    TextView country;
+
 
     Location mLocation;
 
@@ -45,14 +45,12 @@ public class MainActivity extends AppCompatActivity {
         minTemp = (TextView) findViewById(R.id.minTempInfo);
         humidity = (TextView) findViewById(R.id.humidityInfo);
         city = (TextView) findViewById(R.id.cityInfo);
-        country = (TextView) findViewById(R.id.countryInfo);
 
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
             getLocation();
-
         }
     }
 
@@ -82,10 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getLocation();
-                } else {
-                    //System.out.println("DENY");
                 }
-
             }
         }
     }
@@ -120,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(kq);
                 String cityName = jsonObject.getString("name");
                 String country = jsonObject.getJSONObject("sys").getString("country");
-                //System.out.println(name + ", " + country);
+
                 String description = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
 
                 JSONObject main = jsonObject.getJSONObject("main");
@@ -128,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
                 Double temp_max = main.getDouble("temp_max");
                 Double temp_min = main.getDouble("temp_min");
                 Double humidity = main.getDouble("humidity");
+
+                System.out.println(cityName);
+                System.out.println(country);
+                System.out.println(description);
+                System.out.println(temp);
+                System.out.println(humidity);
+
 
                 return new WeatherInfo(description, temp, temp_max, temp_min, humidity, cityName, country);
             } catch (Exception e) {
@@ -150,15 +152,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherInfo weatherInfo) {
             super.onPostExecute(weatherInfo);
+            if(weatherInfo!=null){
+                description.setText(weatherInfo.getDescription());
+                String DEGREE_SIGN = "\u2103";
+                temp.setText(weatherInfo.getTemp() + DEGREE_SIGN);
+                maxTemp.setText(weatherInfo.getMaxTemp() + DEGREE_SIGN);
+                minTemp.setText(weatherInfo.getMinTemp() + DEGREE_SIGN);
+                humidity.setText(weatherInfo.getHumidity() + "%");
+                city.setText(weatherInfo.getCity() + ", " + weatherInfo.getCountry());
+            }
 
-            description.setText(weatherInfo.getDescription());
-            String DEGREE_SIGN = "\u2103";
-            temp.setText(weatherInfo.getTemp() + DEGREE_SIGN);
-            maxTemp.setText(weatherInfo.getMaxTemp() + DEGREE_SIGN);
-            minTemp.setText(weatherInfo.getMinTemp() + DEGREE_SIGN);
-            humidity.setText(weatherInfo.getHumidity() + "%");
-            city.setText(weatherInfo.getCity());
-            country.setText(weatherInfo.getCountry());
         }
     }
 
