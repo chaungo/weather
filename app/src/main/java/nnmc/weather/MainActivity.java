@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     TextView city;
     TextView country;
 
+    Location mLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
-            Location location = getLocation();
-            new GetWeatherInfoByLocation().execute(location);
+            getLocation();
+
         }
     }
 
@@ -64,11 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
-                        Toast.makeText(getApplicationContext(), location.getLatitude() + ":" + location.getLongitude(), Toast.LENGTH_LONG).show();
-                        //System.out.println(location.getLatitude() + ":" + location.getLongitude());
-                        resultLocation[0] = location;
-                    } else {
-                        //System.out.println("XXXXXXX");
+                        mLocation = location;
+                        doingJob();
                     }
                 }
             });
@@ -90,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    public void doingJob() {
+        new GetWeatherInfoByLocation().execute(mLocation);
     }
 
 
@@ -148,11 +150,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherInfo weatherInfo) {
             super.onPostExecute(weatherInfo);
+
             description.setText(weatherInfo.getDescription());
-            temp.setText(weatherInfo.getTemp()+"");
-            maxTemp.setText(weatherInfo.getMaxTemp()+"");
-            minTemp.setText(weatherInfo.getMinTemp()+"");
-            humidity.setText(weatherInfo.getHumidity()+"%");
+            String DEGREE_SIGN = "\u2103";
+            temp.setText(weatherInfo.getTemp() + DEGREE_SIGN);
+            maxTemp.setText(weatherInfo.getMaxTemp() + DEGREE_SIGN);
+            minTemp.setText(weatherInfo.getMinTemp() + DEGREE_SIGN);
+            humidity.setText(weatherInfo.getHumidity() + "%");
             city.setText(weatherInfo.getCity());
             country.setText(weatherInfo.getCountry());
         }
