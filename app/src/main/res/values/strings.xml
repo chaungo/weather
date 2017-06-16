@@ -4,4 +4,7 @@
     <string name="nhiet_do_thap_nhat">Nhiet do thap nhat</string>
     <string name="nhiet_do_cao_nhat">Nhiet do cao nhat</string>
     <string name="do_am">Do am</string>
+    <string name="title_activity_tabs">TabsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

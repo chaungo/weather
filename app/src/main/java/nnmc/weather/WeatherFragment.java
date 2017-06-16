@@ -6,7 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.location.LocationServices;
@@ -21,7 +24,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by nnmchau on 6/16/2017.
+ */
+
+public class WeatherFragment extends Fragment {
+
     Task<Location> mLastLocation;
     static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     TextView description;
@@ -34,31 +42,38 @@ public class MainActivity extends AppCompatActivity {
 
     Location mLocation;
 
+    public WeatherFragment() {
+    }
+
+    public static WeatherFragment newInstance() {
+        return new WeatherFragment();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.weather_fragment, container, false);
+        description = (TextView) rootView.findViewById(R.id.descriptionInfo);
+        temp = (TextView) rootView.findViewById(R.id.tempInfo);
+        maxTemp = (TextView) rootView.findViewById(R.id.maxTempInfo);
+        minTemp = (TextView) rootView.findViewById(R.id.minTempInfo);
+        humidity = (TextView) rootView.findViewById(R.id.humidityInfo);
+        city = (TextView) rootView.findViewById(R.id.cityInfo);
 
-        description = (TextView) findViewById(R.id.descriptionInfo);
-        temp = (TextView) findViewById(R.id.tempInfo);
-        maxTemp = (TextView) findViewById(R.id.maxTempInfo);
-        minTemp = (TextView) findViewById(R.id.minTempInfo);
-        humidity = (TextView) findViewById(R.id.humidityInfo);
-        city = (TextView) findViewById(R.id.cityInfo);
 
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
             getLocation();
         }
+        return rootView;
     }
 
     private Location getLocation() {
         final Location[] resultLocation = {null};
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mLastLocation = LocationServices.getFusedLocationProviderClient(getApplicationContext()).getLastLocation();
-            mLastLocation.addOnSuccessListener(this, new OnSuccessListener<Location>() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mLastLocation = LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation();
+            mLastLocation.addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
 
                 @Override
                 public void onSuccess(Location location) {
@@ -152,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherInfo weatherInfo) {
             super.onPostExecute(weatherInfo);
-            if(weatherInfo!=null){
+            if (weatherInfo != null) {
                 description.setText(weatherInfo.getDescription());
                 String DEGREE_SIGN = "\u2103";
                 temp.setText(weatherInfo.getTemp() + DEGREE_SIGN);
@@ -164,5 +179,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 }
