@@ -1,4 +1,4 @@
-package nnmc.weather;
+package nnmc.ourtrips;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

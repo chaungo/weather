@@ -1,4 +1,4 @@
-package nnmc.weather;
+package nnmc.ourtrips;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package nnmc.weather;
+package nnmc.ourtrips;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

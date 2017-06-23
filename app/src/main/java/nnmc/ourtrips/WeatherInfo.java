@@ -1,4 +1,4 @@
-package nnmc.weather;
+package nnmc.ourtrips;
 
 /**
  * Created by nnmchau on 6/13/2017.
@@ -12,8 +12,11 @@ public class WeatherInfo {
     private Double humidity;
     private String city;
     private String country;
+    private Long dataTime;
+    private String icon;
 
-    public WeatherInfo(String description, Double temp, Double maxTemp, Double minTemp, Double humidity, String city, String country) {
+
+    public WeatherInfo(String description, Double temp, Double maxTemp, Double minTemp, Double humidity, String city, String country, String icon) {
         this.description = description;
         this.temp = temp;
         this.maxTemp = maxTemp;
@@ -21,6 +24,27 @@ public class WeatherInfo {
         this.humidity = humidity;
         this.city = city;
         this.country = country;
+        this.icon = icon;
+    }
+
+    public WeatherInfo(String description, Double maxTemp, Double minTemp, Double humidity, Long dataTime, String icon) {
+        this.description = description;
+        this.maxTemp = maxTemp;
+        this.minTemp = minTemp;
+        this.humidity = humidity;
+        this.dataTime = dataTime;
+        this.icon = icon;
+    }
+
+    public WeatherInfo(String description, Double maxTemp, Double minTemp, Double humidity, String city, String country, Long dataTime, String icon) {
+        this.description = description;
+        this.maxTemp = maxTemp;
+        this.minTemp = minTemp;
+        this.humidity = humidity;
+        this.city = city;
+        this.country = country;
+        this.dataTime = dataTime;
+        this.icon = icon;
     }
 
     public String getDescription() {
@@ -77,5 +101,21 @@ public class WeatherInfo {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Long getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(Long dataTime) {
+        this.dataTime = dataTime;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }
