@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "76797911142",
+    "firebase_url": "https://ourtrips-10824.firebaseio.com",
+    "project_id": "ourtrips-10824",
+    "storage_bucket": "ourtrips-10824.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76797911142:android:bb37934c050a02e9",
+        "android_client_info": {
+          "package_name": "nnmc.ourtrips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76797911142-6seoo93o6s6qqtnkgeia3jn97gp618t0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nnmc.ourtrips",
+            "certificate_hash": "1e17a1c7cede32e57b9b3c19c72f7156bb3a32c7"
+          }
+        },
+        {
+          "client_id": "76797911142-974162andd14paueu9nt8cghae79f4st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlPHuYDjjzl8cUJe3LV4BXyH1hcv2p07I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76797911142-974162andd14paueu9nt8cghae79f4st.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

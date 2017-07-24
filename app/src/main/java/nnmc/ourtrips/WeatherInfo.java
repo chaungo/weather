@@ -27,14 +27,6 @@ public class WeatherInfo {
         this.icon = icon;
     }
 
-    public WeatherInfo(String description, Double maxTemp, Double minTemp, Double humidity, Long dataTime, String icon) {
-        this.description = description;
-        this.maxTemp = maxTemp;
-        this.minTemp = minTemp;
-        this.humidity = humidity;
-        this.dataTime = dataTime;
-        this.icon = icon;
-    }
 
     public WeatherInfo(String description, Double maxTemp, Double minTemp, Double humidity, String city, String country, Long dataTime, String icon) {
         this.description = description;
