@@ -84,7 +84,7 @@ public class TabsActivity extends AppCompatActivity {
                 case 0:
                     return CurrentTripFragment.newInstance();
                 case 1:
-                    return WeatherFragment.newInstance();
+                    return InformationFragment.newInstance();
                 case 2:
                     return HistoryFragment.newInstance();
             }
