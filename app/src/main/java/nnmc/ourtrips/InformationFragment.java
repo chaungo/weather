@@ -71,12 +71,12 @@ public class InformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.weather_fragment, container, false);
-        textViewDescription = rootView.findViewById(R.id.descriptionInfo);
-        textViewTemp = rootView.findViewById(R.id.tempInfo);
-        textViewMaxTemp = rootView.findViewById(R.id.maxTempInfo);
-        textViewMinTemp = rootView.findViewById(R.id.minTempInfo);
-        textViewHumidity = rootView.findViewById(R.id.humidityInfo);
-        textViewCity = rootView.findViewById(R.id.cityInfo);
+        textViewDescription = (TextView) rootView.findViewById(R.id.descriptionInfo);
+        textViewTemp = (TextView) rootView.findViewById(R.id.tempInfo);
+        textViewMaxTemp = (TextView) rootView.findViewById(R.id.maxTempInfo);
+        textViewMinTemp = (TextView) rootView.findViewById(R.id.minTempInfo);
+        textViewHumidity = (TextView) rootView.findViewById(R.id.humidityInfo);
+        textViewCity = (TextView) rootView.findViewById(R.id.cityInfo);
 
 
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

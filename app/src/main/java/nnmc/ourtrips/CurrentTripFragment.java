@@ -30,7 +30,7 @@ public class CurrentTripFragment extends Fragment {
                              Bundle savedInstanceState) {
         initDataset();
         View rootView = inflater.inflate(R.layout.tab_current_trip, container, false);
-        recyclerView = rootView.findViewById(R.id.current_trip_timeline);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.current_trip_timeline);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         MyCurrentTripRecyclerAdapter myCurrentTripRecyclerAdapter = new MyCurrentTripRecyclerAdapter(mDataset);
